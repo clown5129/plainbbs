@@ -1,0 +1,11 @@
+@(elements: helper.FieldElements)
+
+<div class="form-group @if(elements.hasErrors){has-error}">
+  <label class="sr-only control-label" for="@elements.id">@elements.label</label>
+  <div class="col-xs-12 col-sm-8">
+    @elements.input
+  </div>
+  @elements.errors.map { msg =>
+    <span class="help-block">@msg</span>
+  }
+</div>

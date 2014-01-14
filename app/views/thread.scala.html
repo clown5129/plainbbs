@@ -1,0 +1,57 @@
+@(thread: BbsThread, posts: List[BbsPost], postForm: Form[BbsPostData])
+
+@import utils.BbsFieldHelper._
+
+@postUnit(p: BbsPost, idx: Int) = {
+  <div class="post-unit">
+    <div class="post-unit-hd">
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="h5">@(idx + 1): @p.subject.getOrElse("-")</div>
+        </div>
+        <div class="col-xs-4">
+          <div class="text-right"><small>Posted at: @p.postedAt.format("yyyy/MM/dd HH:mm:ss.SSS")</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="post-unit-bd">
+      @Html(utils.ExFormats.format(p.content))
+    </div>
+  </div>
+}
+
+@main(thread.title) {
+  <div class="container">
+    <a href="@routes.Application.index">戻る</a>
+
+    <div class="thre-hd">
+      <h3>@thread.title</h3>
+    </div>
+
+    <!-- Post List -->
+    <div class="thre-bd">
+      @for((p, idx) <- posts.zipWithIndex) {
+        @postUnit(p, idx)
+      }
+    </div>
+
+    <!-- Post Form -->
+    <div class="sect">
+      <h3>Post</h3>
+      @helper.form(action = routes.Application.post(thread.id), 'class -> "form-horizontal") {
+        @helper.inputText(
+          postForm("subject"),
+          'placeHolder -> "Subject",
+          'class -> "form-control")
+        @helper.input(
+          postForm("content"),
+          'placeHolder -> "Input Content Here...",
+          'class -> "form-control",
+          'rows -> "3") { (id, name, value, args) =>
+            <textarea id="@id" name="@name" @toHtmlArgs(args)>@value</textarea>
+          }
+        <button type="submit" class="btn btn-lg btn-primary">Post</button>
+      }
+    </div>
+  </div>
+}

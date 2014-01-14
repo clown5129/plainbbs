@@ -1,0 +1,70 @@
+@(threads: List[BbsThread], createForm: Form[BbsThreadData])(implicit flash: Flash)
+
+@import utils.BbsFieldHelper._
+
+@threadTable = {
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th class="text-center" width="40">#</th>
+          <th class="text-center">Title</th>
+          <th class="text-center" width="80">Posts</th>
+          <th class="text-center" width="200">Last Posted Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for((t, idx) <- threads.zipWithIndex) {
+          <tr>
+            <td class="text-right">@(idx + 1)</td>
+            <td><a href="@routes.Application.view(t.id)">@t.title</a></td>
+            <td class="text-right">@t.postCount</td>
+            <td class="text-right">@t.lastPostedAt.format("yyyy/MM/dd HH:mm:ss")</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
+
+@main("Your Plain BBS !") {
+  <div class="container">
+    <div class="header">
+      <h1>Your Plain BBS !</h1>
+    </div>
+    
+    @flash.get("error").map{ message =>
+      <div class="sect">
+        <span class="alert alert-danger">@message</span>
+      </div>
+    }
+    
+    <div class="sect">
+      <h3>Threads</h3>
+      <!-- Table of Threads -->
+      @if(threads.isEmpty) {
+        There are no threads ... orz
+      } else {
+        @threadTable
+      }
+    </div>
+
+    <div id="create" class="sect">
+      <h3>Create New Thread</h3>
+      @helper.form(action = routes.Application.create, 'class -> "form-horizontal") {
+        @helper.inputText(
+          createForm("title"),
+          'placeHolder -> "Thread Title",
+          'class -> "form-control")
+        @helper.input(
+          createForm("content"),
+          'placeHolder -> "Input Content Here...",
+          'class -> "form-control",
+          'rows -> "3") { (id, name, value, args) =>
+            <textarea id="@id" name="@name" @toHtmlArgs(args)>@value</textarea>
+          }
+        <button type="submit" class="btn btn-lg btn-primary">Create</button>
+      }
+    </div>
+  </div>
+}

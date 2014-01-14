@@ -1,0 +1,21 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET    /                       controllers.Application.index  
+
+# Create a new thread
+POST   /threads                controllers.Application.create
+
+# View the thread
+GET    /threads/:id            controllers.Application.view(id: Int)
+
+# Make a post to the thread
+POST   /threads/:id            controllers.Application.post(id: Int)
+
+# Map static resources from the /public folder to the /assets URL path
+GET    /assets/samples/*file   controllers.Assets.at(path="/public/samples", file)
+
+# Map static resources from the /public folder to the /assets URL path
+GET    /assets/*file           controllers.Assets.at(path="/public", file)
