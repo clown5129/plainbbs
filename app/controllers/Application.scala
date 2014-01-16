@@ -39,8 +39,6 @@ object Application extends Controller {
       })
   }
   
-  def aaa = TODO
-
   def view(id: Int) = Action {
     findThread(id) map {
       thread => Ok(views.html.thread(thread, getPosts(id), postForm))
