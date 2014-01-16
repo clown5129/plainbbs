@@ -8,7 +8,6 @@ import play.api.data.Forms._
 import play.api.Play.current
 import models.PlainBbsTables._
 import views.html.thread
-import views.html.defaultpages.badRequest
 
 case class BbsThreadData(title: String, content: String)
 
