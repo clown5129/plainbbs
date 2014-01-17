@@ -23,7 +23,7 @@ object HyperLinkFormatter extends InputFormat {
       m => {
         val url = m.group(1);
         source match {
-          case imgPtn => "<img src=\"%1$s\" alt=\"%1$s\">".format(url)
+          case imgPtn() => "<img src=\"%1$s\" alt=\"%1$s\">".format(url)
           case _ => "<a target=\"__blank\" href=\"%1$s\">%1$s</a>".format(url)
         }
       })
