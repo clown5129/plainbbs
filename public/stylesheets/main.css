@@ -41,3 +41,10 @@ body {
 	padding: 5px;
 	word-break: break-all;
 }
+
+.post-unit-bd > img {
+	max-width: 100%;
+	max-height: 400px;
+	margin: 10px;
+	border: solid 5px #fff;
+}
