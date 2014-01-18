@@ -6,6 +6,7 @@ import play.api.mvc._
 import play.api.data._
 import play.api.data.Forms._
 import play.api.Play.current
+import play.api.i18n.Messages
 import models.PlainBbsTables._
 import views.html.thread
 
@@ -14,6 +15,7 @@ case class BbsThreadData(title: String, content: String)
 case class BbsPostData(subject: Option[String], content: String)
 
 object Application extends Controller {
+
   val createForm = Form {
     mapping(
       "title" -> nonEmptyText,
@@ -43,7 +45,7 @@ object Application extends Controller {
     findThread(id) map {
       thread => Ok(views.html.thread(thread, getPosts(id), postForm))
     } getOrElse {
-      Redirect(routes.Application.index).flashing("error" -> "The thread was not found.")
+      Redirect(routes.Application.index).flashing("error" -> Messages(MessageId.ERROR_THREAD_NOTFOUND))
     }
   }
 
@@ -52,7 +54,7 @@ object Application extends Controller {
       formWithErrors => findThread(id) map {
         thread => Ok(views.html.thread(thread, getPosts(id), formWithErrors))
       } getOrElse {
-        Redirect(routes.Application.index).flashing("error" -> "The thread was not found.")
+        Redirect(routes.Application.index).flashing("error" -> Messages(MessageId.ERROR_THREAD_NOTFOUND))
       },
       postData => {
         postToThread(id, postData)
@@ -60,4 +62,8 @@ object Application extends Controller {
       })
   }
 
+}
+
+object MessageId {
+  val ERROR_THREAD_NOTFOUND = "error.thread.notfound"
 }
