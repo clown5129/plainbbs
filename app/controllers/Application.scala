@@ -12,7 +12,7 @@ import views.html.thread
 
 case class BbsThreadData(title: String, content: String)
 
-case class BbsPostData(subject: Option[String], content: String)
+case class BbsPostData(subject: String, content: String)
 
 object Application extends Controller {
 
@@ -24,7 +24,7 @@ object Application extends Controller {
 
   val postForm = Form {
     mapping(
-      "subject" -> optional(text),
+      "subject" -> nonEmptyText,
       "content" -> nonEmptyText)(BbsPostData.apply)(BbsPostData.unapply)
   }
 
@@ -43,7 +43,11 @@ object Application extends Controller {
   
   def view(id: Int) = Action {
     findThread(id) map {
-      thread => Ok(views.html.thread(thread, getPosts(id), postForm))
+      thread =>
+        Ok(views.html.thread(
+          thread,
+          getPosts(id),
+          postForm.fill(BbsPostData("NO SUBJECT", ""))))
     } getOrElse {
       Redirect(routes.Application.index).flashing("error" -> Messages(MessageId.ERROR_THREAD_NOTFOUND))
     }

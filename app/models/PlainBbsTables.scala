@@ -17,7 +17,7 @@ case class BbsThread(
 
 case class BbsPost(
   id: Int = -1,
-  subject: Option[String],
+  subject: String,
   postedAt: Timestamp,
   content: String,
   visible: Boolean = true,
@@ -41,7 +41,7 @@ object PlainBbsTables {
 
   class BbsPosts(tag: Tag) extends Table[BbsPost](tag, "bbs_posts") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
-    def subject = column[Option[String]]("subject")
+    def subject = column[String]("subject")
     def postedAt = column[Timestamp]("posted_at")
     def content = column[String]("content")
     def visible = column[Boolean]("visible")
@@ -63,7 +63,7 @@ object PlainBbsTables {
       createdAt = ts,
       lastPostedAt = ts)
     bbsPosts += BbsPost(
-      subject = Some(threadData.title),
+      subject = threadData.title,
       postedAt = ts,
       content = threadData.content,
       threadId = threadId)

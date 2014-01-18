@@ -11,7 +11,7 @@ create table bbs_threads (
 
 create table bbs_posts (
   id        serial       primary key,
-  subject   varchar(255),
+  subject   varchar(255) not null,
   posted_at timestamp(3) not null,
   content   text         not null,
   visible   boolean      not null,

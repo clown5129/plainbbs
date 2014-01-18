@@ -7,7 +7,7 @@
     <div class="post-unit-hd">
       <div class="row">
         <div class="col-xs-8">
-          <div class="h5">@(idx + 1): @p.subject.getOrElse("-")</div>
+          <div class="h5">@(idx + 1): @p.subject</div>
         </div>
         <div class="col-xs-4">
           <div class="text-right"><small>Posted at: @p.postedAt.format("yyyy/MM/dd HH:mm:ss.SSS")</small></div>
@@ -41,6 +41,7 @@
       @helper.form(action = routes.Application.post(thread.id), 'class -> "form-horizontal") {
         @helper.inputText(
           postForm("subject"),
+          'required -> "required",
           'placeHolder -> "Subject",
           'class -> "form-control")
         @helper.input(
