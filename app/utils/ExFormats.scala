@@ -18,12 +18,12 @@ object LineBreakFormatter extends InputFormat {
 object HyperLinkFormatter extends InputFormat {
   def format(source: String) = {
     val urlPtn = """((https?|ftp)://[a-zA-Z0-9_/%#$&?()~_.=+-:]+)""".r
-    val imgPtn = """(\.png|\.jpe?g|\.gif)$""".r
+    val imgPtn = """(.*/(.*(\.png|\.jpe?g|\.gif)))""".r
     urlPtn.replaceAllIn(source,
       m => {
         val url = m.group(1);
-        source match {
-          case imgPtn() => "<img src=\"%1$s\" alt=\"%1$s\">".format(url)
+        url match {
+          case imgPtn(_, imgName, _) => "<img src=\"%s\" alt=\"%s\">".format(url, imgName)
           case _ => "<a target=\"__blank\" href=\"%1$s\">%1$s</a>".format(url)
         }
       })
