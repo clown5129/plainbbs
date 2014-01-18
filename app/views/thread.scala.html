@@ -45,6 +45,7 @@
           'class -> "form-control")
         @helper.input(
           postForm("content"),
+          'required -> "required",
           'placeHolder -> "Input Content Here...",
           'class -> "form-control",
           'rows -> "3") { (id, name, value, args) =>

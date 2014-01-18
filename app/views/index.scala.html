@@ -54,10 +54,12 @@
       @helper.form(action = routes.Application.create, 'class -> "form-horizontal") {
         @helper.inputText(
           createForm("title"),
+          'required -> "required",
           'placeHolder -> "Thread Title",
           'class -> "form-control")
         @helper.input(
           createForm("content"),
+          'required -> "required",
           'placeHolder -> "Input Content Here...",
           'class -> "form-control",
           'rows -> "3") { (id, name, value, args) =>
