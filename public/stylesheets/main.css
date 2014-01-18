@@ -24,13 +24,17 @@ body {
 
 .post-unit {
 	position: relative;
-	background-color: #eee;
+	background-color: #e0f0f5;
 	margin-bottom: 10px;
+	border: solid 2px #506070;
+	border-radius: 0px;
 }
 
 .post-unit-hd {
 	padding: 5px 10px 5px 5px;
-	border-bottom: solid 1px #ccc;
+	color: #fff;
+	background-color: #506070;
+	/* border-bottom: solid 1px #ccc; */
 }
 
 .post-unit-bd {
