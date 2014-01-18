@@ -39,4 +39,5 @@ body {
 
 .post-unit-bd {
 	padding: 5px;
+	word-break: break-all;
 }
