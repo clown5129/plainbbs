@@ -34,8 +34,8 @@
     </div>
     
     @flash.get("error").map{ message =>
-      <div class="sect">
-        <span class="alert alert-danger">@message</span>
+      <div class="sect alert alert-danger">
+        @message
       </div>
     }
     
