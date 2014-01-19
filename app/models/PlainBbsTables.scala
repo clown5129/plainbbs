@@ -2,10 +2,12 @@ package models
 
 import java.sql.{ Array => _, _ }
 import scala.slick.driver.PostgresDriver.simple._
-import controllers.BbsThreadData
 import play.api.Play.current
 import play.api.db.{ DB => PlayDB }
-import controllers.BbsPostData
+
+case class BbsThreadData(title: String, content: String)
+
+case class BbsPostData(subject: String, content: String)
 
 case class BbsThread(
   id: Int = -1,

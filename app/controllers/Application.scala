@@ -7,12 +7,9 @@ import play.api.data._
 import play.api.data.Forms._
 import play.api.Play.current
 import play.api.i18n.Messages
+import models._
 import models.PlainBbsTables._
 import views.html.thread
-
-case class BbsThreadData(title: String, content: String)
-
-case class BbsPostData(subject: String, content: String)
 
 object Application extends Controller {
 
