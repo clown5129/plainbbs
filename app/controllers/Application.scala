@@ -63,6 +63,7 @@ object Application extends Controller {
       })
   }
 
+  def delete(id: Int) = TODO
 }
 
 object MessageId {

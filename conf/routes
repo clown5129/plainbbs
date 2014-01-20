@@ -14,6 +14,9 @@ GET    /threads/:id            controllers.Application.view(id: Int)
 # Make a post to the thread
 POST   /threads/:id            controllers.Application.post(id: Int)
 
+# Delete the thread
+DELETE /threads/:id            controllers.Application.delete(id: Int)
+
 # Map static resources from the /public folder to the /assets URL path
 GET    /assets/samples/*file   controllers.Assets.at(path="/public/samples", file)
 
